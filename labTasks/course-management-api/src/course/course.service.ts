@@ -86,4 +86,13 @@ export class CourseService {
     courses.push(course);
     return courses;
   }
+  updatecourse(id:number, course:any){
+    return "course Updated";
+  }
+  Patchcourse(id:number, course:any){
+    return `course ${id} Patched`;
+  }
+  DeteteCourse(id:number){
+    return `course ${id} Deleted`;
+  }
 }

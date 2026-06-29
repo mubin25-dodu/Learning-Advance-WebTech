@@ -1,8 +1,8 @@
 // install cli
-$ npm i -g @nestjs/cli 
+ npm i -g @nestjs/cli 
 
 //create the project
-$ nest new project-name
+ nest new project-name
 
 //run the project in dev mode
 npm run start:dev  
@@ -12,5 +12,4 @@ npm run start:dev
     nest g controller course 
     nest g service course
 or all at once 
-
-nest g resource name --no-spec
+    nest g resource name --no-spec
