@@ -1,0 +1,28 @@
+// install cli
+ npm i -g @nestjs/cli 
+
+//create the project
+ nest new project-name
+
+//run the project in dev mode
+npm run start:dev  
+
+//Generate: 
+    nest g module course 
+    nest g controller course 
+    nest g service course
+or all at once 
+    nest g resource name --no-spec
+
+
+npm install class-validator 
+            class-transformer 
+            @nestjs/platform-express 
+            multer 
+
+notes :
+    •class-validator — provides decorators like @IsString(), @IsNotEmpty() for DTO validation 
+    • class-transformer — transforms plain objects into class instances 
+    • @nestjs/platform-express — provides FileInterceptor, FilesInterceptor for file uploads 
+    • multer — handles multipart/form-data; provides diskStorage 
+    • @types/multer, @types/express — TypeScript type definitions (dev only) 
