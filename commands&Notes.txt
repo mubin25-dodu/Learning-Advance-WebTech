@@ -26,3 +26,13 @@ notes :
     • @nestjs/platform-express — provides FileInterceptor, FilesInterceptor for file uploads 
     • multer — handles multipart/form-data; provides diskStorage 
     • @types/multer, @types/express — TypeScript type definitions (dev only) 
+
+
+for validation DTO
+
+
+app.useGlobalPipes(new ValidationPipe({
+    whitelist :true,
+    forbidNonWhitelisted : true,
+    transform : true
+    })); 
