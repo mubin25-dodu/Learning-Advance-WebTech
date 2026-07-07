@@ -28,6 +28,6 @@ import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsStrin
 
     @IsBoolean()
     @IsOptional()
-    IsActive!:boolean
+    IsActive?:boolean
 
  }
