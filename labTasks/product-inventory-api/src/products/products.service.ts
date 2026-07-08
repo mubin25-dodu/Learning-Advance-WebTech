@@ -104,8 +104,9 @@ export class ProductsService {
         
         const updatedb = await this.productRepo.update(id,data);
         if(updatedb.affected && updatedb.affected == 1){
+            const updatedProduct = await this.productRepo.findOne({ where:{id:id}});
             Result.message = `Product Updated Succesfully`;
-            Result.data = check;
+            Result.data = updatedProduct ?? check;
             return  Result;
         }
             Result.message = `Product Update Failed`;
@@ -186,6 +187,7 @@ export class ProductsService {
     async search(term:string ) : Promise<result<creatproductDTO[]>>{
 
         const Result = new result<creatproductDTO[]>();
+        console.log(term);
         try{
          const check = await this.productRepo.find({ where:{name: Like(`%${term}%`)}});
 
@@ -218,9 +220,9 @@ export class ProductsService {
             Result.success = false;
             return Result;
             }
-            check.isActive = !check.isActive; // toggled the button 
+            check.IsActive = !check.IsActive; // toggled the button 
 
-            Result.message = `Product Toggled to ${check.isActive}`;
+            Result.message = `Product Toggled to ${check.IsActive}`;
             
             this.productRepo.save(check);
             Result.data = check;
@@ -233,4 +235,28 @@ export class ProductsService {
         return Result ;
 
     }
+    async bycategory(cat:string) : Promise<result<creatproductDTO[]>>{
+
+        const Result = new result<creatproductDTO[]>();
+        try{
+         const check = await this.productRepo.find({where:{category:cat}});
+
+         if(check.length === 0){
+            Result.message = "No products found";
+            return Result;
+            }
+            Result.message = `${check.length} products found` ;
+            Result.data = check;
+            Result.success = true;
+            return  Result;
+
+        }catch (e: unknown) {
+            Result.message = e instanceof Error ? e.message : String(e);
+            Result.success = false;
+        }
+        return Result ;
+
+    }
+
+    
 }
