@@ -1,6 +1,9 @@
-import { Body, Controller , Delete, Get, Param ,Patch,Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller , Delete, Get, Param ,Patch,Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { courses } from './DTO/create-course.DTO';
+import { FileInterceptor  } from '@nestjs/platform-express';
+import { diskStorage , Multer } from 'multer';
+
 
 @Controller('course')
 export class CourseController {
@@ -34,6 +37,37 @@ patchCourse( @Param('id') id:string, @Body() course:courses){
   console.log(course);
   console.log(id);
   return this.courseService.Patchcourse(id , course);
+}
+
+@Post("upload")
+@UseInterceptors(
+  FileInterceptor('file' , {
+    storage: diskStorage({
+      destination: './uploads',
+      filename: ( res , file , cb) =>{
+        const filename = Date.now() + "-" + file.originalname;
+        cb(null , filename);
+      },
+    }),
+    fileFilter: (res , file ,cb) => {
+      if(file.originalname.match(/^.*\.(jpg|jpeg|pdf|png)$/)){
+        cb(null, true);
+      }else{
+        cb(new BadRequestException("Wrong file Formate") , false)
+      }
+    },
+    
+    limits:{
+      fileSize : 2 * 1024 * 1024,
+    }
+  })
+)
+uploadfile(@UploadedFile() file: Multer.File){
+
+  return { message :"file uploaded" ,
+    filename: file.filename,
+    path: file.path
+  }
 }
 
 @Delete(":id")
