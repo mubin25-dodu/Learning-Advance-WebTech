@@ -10,7 +10,8 @@ export class EnrolementService {
     enrollStudent( @Body() studentName: string, courseId: string){
         
        return this.CourseService.getCourseById(courseId) != null ? 
-        this.notificationService.sendNotification({StudentName: studentName , message: `You have been enrolled in course ${courseId}`})
+        this.notificationService.sendNotification({StudentName: studentName , 
+            message: `You have been enrolled in course ${courseId}`})
         :"Course Not Found";
     }    
     getEnrollments(){
