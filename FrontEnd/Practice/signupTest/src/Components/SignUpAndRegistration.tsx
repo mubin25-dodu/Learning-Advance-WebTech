@@ -1,6 +1,21 @@
 import axios from "axios";
+import { useState } from "react";
 
  function Authpage() {
+
+    const [verifyEmail , setverifyEmail] = useState("");
+    const handleLogin = async () => {
+        try {
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_API_URL}auth/Verifyemail`,
+                { email: verifyEmail }
+            );
+            console.log(data);
+        } catch (e) {
+            console.error("API error:", e);
+        }
+    }
+
     return (
         <>
         {/* main outerlayer */}
@@ -9,7 +24,7 @@ import axios from "axios";
             {/* the contaainer */}
             <div className="bg- w-[50vw] h-[50vh] rounded-2xl flex " style={{boxShadow:'0px 0px 20px 1px'}}> 
                 {/* slider */}
-                <form id="loginform" className="flex items-center justify-center w-[25vw] h-[50vh] text-black ml-auto" action="">
+                <form onSubmit={(e) => e.preventDefault()} className="flex items-center justify-center w-[25vw] h-[50vh] text-black ml-auto" action="">
                     <div className=" flex items-start justify-center flex-col">
                         <div className="flex items-start flex-col">
                             <div className="items-start"><label  htmlFor="">Enter Email:</label></div>
@@ -24,14 +39,14 @@ import axios from "axios";
                         <button className="btn btn-neudival mt-2" type="submit">Login</button>
                     </div>
                 </form>
-                <form id="loginform" className="flex items-center justify-center w-[25vw] h-[50vh] text-black ml-auto" action="">
+                <form onSubmit={(e) => e.preventDefault()} className="flex items-center justify-center w-[25vw] h-[50vh] text-black ml-auto" action="">
                     <div className=" flex items-start justify-center flex-col">
                         <div className="flex items-start flex-col">
                             <div className="items-start"><label  htmlFor="">Enter Email:</label></div>
-                            <div><input className="border" type="email" name="" id="VerifyEmail" /></div>
+                            <div><input className="border" type="email" name="" id="VerifyEmail" value={verifyEmail} onChange={(e)=>setverifyEmail(e.target.value)} /></div>
                         </div>
-                        <span className="text-red" id="emailerrorverify"></span>
-                        <button className="btn btn-neudival mt-2" type="button" onClick={()=>VerifyEmail()}>Send mail</button>
+                        <span className="text-red" id="emailerrorverify" ></span>
+                        <button className="btn btn-neudival mt-2" type="submit" onClick={handleLogin}>Send mail</button>
                     </div>
                 </form>
 
@@ -43,24 +58,6 @@ import axios from "axios";
     );
  }
 
- async function VerifyEmail(){
-    const emailInput = document.getElementById('VerifyEmail') as HTMLInputElement | null;
-    const errorspan = document.getElementById('emailerrorverify') as HTMLInputElement | null;
 
-    console.log(import.meta.env.VITE_HELLO);
-    
-    if (emailInput && emailInput.value) {
-        console.log('Email entered:', emailInput.value);
-        const getres = await axios.post(`${import.meta.env.VITE_API_URL}auth/Verifyemail` , emailInput.value);
-
-        console.log(getres);
-        
-    } else {
-        if (errorspan) { 
-            errorspan.value = "";
-            errorspan.textContent = 'Please enter your email';
-        }
-    }
- }
 
  export default Authpage
