@@ -1,5 +1,6 @@
 import './App.css'
 import Studentinfo from './components/StudentCard';
+import Header from './components/Header';
 
 function App() {
 const initialStudents = [
@@ -52,7 +53,10 @@ const initialStudents = [
 ];
   return (
     <>
+    <Header/>
+    <span className=' flex flex-wrap'>
     {initialStudents.map(e=>(<Studentinfo key={e.id} {...e} />))}
+    </span>
     </>
   )
 }
