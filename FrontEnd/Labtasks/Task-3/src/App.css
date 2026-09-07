@@ -1,0 +1,39 @@
+.dashboard {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+}
+
+.light { --background: #f4f6f8; --surface: #ffffff; --text: #202124; --muted: #5f6368; --border: #d7dbe0; --button: #2563eb; --danger: #b42318; }
+.dark { --background: #202124; --surface: #303134; --text: #f1f3f4; --muted: #bdc1c6; --border: #5f6368; --button: #8ab4f8; --danger: #f28b82; }
+
+.dashboard-header, .dashboard-content { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 4px; font-size: 30px; }
+h2 { font-size: 22px; }
+.dashboard-header p, .student-card p { color: var(--muted); }
+button, input, select { font: inherit; }
+button { cursor: pointer; border: 0; border-radius: 4px; padding: 9px 12px; background: var(--button); color: #fff; }
+.dashboard-content { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: start; }
+.form-section, .student-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 18px; }
+form label { display: block; margin-bottom: 13px; font-weight: 600; }
+form input { display: block; width: 100%; margin-top: 5px; padding: 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--background); color: var(--text); }
+form button { width: 100%; margin-top: 4px; }
+.error { display: block; margin-top: 4px; color: var(--danger); font-size: 13px; font-weight: 400; }
+.success-message { padding: 8px; color: #176b32; background: #d9f4df; border-radius: 4px; }
+.section-heading, .card-heading, .student-controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.student-card { margin-bottom: 12px; }
+.card-heading h3 { margin: 0; }
+.student-card p { margin-bottom: 7px; }
+.student-card strong { color: var(--text); }
+.remove-button { background: var(--danger); margin-top: 8px; }
+.search-input { min-width: 220px; padding: 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); }
+.sort-control { display: flex; align-items: center; gap: 5px; color: var(--muted); }
+select { padding: 7px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); }
+
+@media (max-width: 750px) {
+  .dashboard-header, .section-heading, .student-controls { align-items: stretch; flex-direction: column; }
+  .dashboard-content { grid-template-columns: 1fr; }
+  .search-input { min-width: 0; }
+}
